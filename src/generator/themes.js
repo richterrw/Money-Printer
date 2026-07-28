@@ -7,7 +7,9 @@
 
 const THEMES = {
   food: {
-    match: /restaurant|cafe|coffee|bakery|bar|pizza|grill|diner|deli|food|eatery|bistro|pub|taco|sushi|kitchen/i,
+    // Word boundaries on short/ambiguous tokens so "bar" doesn't match
+    // "Barbershop", "deli" doesn't match "delivery", etc.
+    match: /restaurant|cafe|coffee|bakery|\bbar\b|barbecue|\bbbq\b|pizza|pizzeria|\bgrill\b|diner|\bdeli\b|\bfood\b|eatery|bistro|\bpub\b|taco|sushi|steakhouse|\bkitchen\b/i,
     accent: "#e8632c",
     accent2: "#f6a13d",
     ink: "#2b1a12",
@@ -17,7 +19,7 @@ const THEMES = {
     sampleServices: ["Fresh daily menu", "Dine-in & takeout", "Catering available"]
   },
   trades: {
-    match: /plumb|electric|hvac|roof|construct|contractor|handyman|repair|landscap|paint|garage|mechanic|auto|pest|lock|clean|mov/i,
+    match: /plumb|electric|hvac|roof|construct|contractor|handyman|repair|landscap|paint|garage|mechanic|\bauto\b|pest|locksmith|clean(?:ing|er|ers)?\b|moving|mover/i,
     accent: "#1f6feb",
     accent2: "#3aa0ff",
     ink: "#0b1b2b",

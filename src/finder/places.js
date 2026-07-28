@@ -50,7 +50,8 @@ function mapPlace(p) {
 
   // Raw photo resource names — resolved to real image URLs later, only when a
   // site is actually built (keeps the find step cheap: no per-photo API calls).
-  const photoNames = (p.photos || []).slice(0, 4).map((ph) => ph.name).filter(Boolean);
+  // Grab up to 10 so galleries (restaurants, salons) have plenty to work with.
+  const photoNames = (p.photos || []).slice(0, 10).map((ph) => ph.name).filter(Boolean);
 
   return {
     name: p.displayName && p.displayName.text,
@@ -85,7 +86,7 @@ async function resolvePhotoUrl(photoName, { apiKey, maxWidthPx = 1200 } = {}) {
 }
 
 /* Resolve up to `limit` photo names to URLs, dropping any that fail. */
-async function resolvePhotos(photoNames, { apiKey, maxWidthPx = 1200, limit = 4 } = {}) {
+async function resolvePhotos(photoNames, { apiKey, maxWidthPx = 1400, limit = 8 } = {}) {
   if (!apiKey || !Array.isArray(photoNames) || !photoNames.length) return [];
   const chosen = photoNames.slice(0, limit);
   const urls = await Promise.all(
