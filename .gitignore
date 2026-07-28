@@ -1,0 +1,10 @@
+# dependencies
+node_modules/
+
+# generated client sites & lead data (regenerate with the CLI)
+output/
+
+# os / editor
+.DS_Store
+*.log
+.env

@@ -1,0 +1,22 @@
+{
+  "name": "money-printer",
+  "version": "0.1.0",
+  "description": "Find local businesses without a good website and generate outstanding sites to sell them.",
+  "type": "commonjs",
+  "bin": {
+    "money-printer": "src/cli.js"
+  },
+  "scripts": {
+    "find": "node src/cli.js find",
+    "generate": "node src/cli.js generate",
+    "pipeline": "node src/cli.js pipeline",
+    "serve": "node src/cli.js serve",
+    "demo": "node src/cli.js pipeline \"restaurants in Boise, ID\" && node src/cli.js serve",
+    "help": "node src/cli.js help"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "private": true
+}
