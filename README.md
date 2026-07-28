@@ -20,13 +20,69 @@ part human (the phone call).
 | --- | --- |
 | **Lead finder** (`src/finder`) | Queries Google Places for local businesses, flags the ones with **no website or an outdated one**, and returns their **phone numbers** — ranked best-prospect-first. |
 | **Website generator** (`src/generator`) | Turns one business into a polished, **mobile-ready, self-contained website** (single HTML file) — themed automatically by category, with click-to-call, reviews, hours, and map links. |
-| **CLI** (`src/cli.js`) | Ties it together: `find`, `generate`, `pipeline`, `serve`. |
+| **📱 Mobile app** (`src/server.js` + `public/`) | Run the whole thing **from your phone**: search leads, tap-to-call, build a site in one tap, and text the link — all from a phone-friendly, installable web app. |
+| **CLI** (`src/cli.js`) | Same pipeline from a terminal: `find`, `generate`, `pipeline`, `serve`. |
 | **Agency sales site** (`site/`) | *Our own* marketing site to sell the service — the conversion engine. Open `site/index.html`. |
 | **Examples** (`examples/`) | Screenshots + a live sample generated site. |
 
 ---
 
-## Quick start
+## 📱 Run it from your phone
+
+A phone can't run the command line, so the app runs as a tiny web server you
+open in your phone's browser. Two ways to do it:
+
+### Option A — same Wi-Fi (fastest to try, free)
+
+Run the server on your computer; open it on your phone over Wi-Fi.
+
+```bash
+npm start           # starts the app on port 4000
+npm run whoami      # prints the exact URL to type on your phone
+```
+
+On your phone (connected to the **same Wi-Fi**), open the printed
+`http://192.168.x.x:4000/` address. In Safari/Chrome tap **Share → Add to Home
+Screen** and it installs like a real app.
+
+> Downside: the links you build are only reachable on your Wi-Fi, so you can't
+> text them to a prospect yet. For that, use Option B.
+
+### Option B — deploy it (reach it anywhere + real links to text)
+
+Host the server so it has a public URL. Now the app *and* every website you
+build get real links you can text to prospects on the spot. It's a plain Node
+app with no dependencies, so almost anything works:
+
+```bash
+# any Docker host (Render, Railway, Fly.io, a VPS, ...)
+docker build -t money-printer .
+docker run -e GOOGLE_PLACES_API_KEY=your-key -p 4000:4000 money-printer
+```
+
+Or point a Node host (Render/Railway/Heroku-style) at this repo with:
+- **Start command:** `npm start`
+- **Env var:** `GOOGLE_PLACES_API_KEY` (for live leads)
+
+Then open the public URL on your phone and Add to Home Screen.
+
+> ⚡ **Instant public link without deploying:** run `npm start` on your laptop,
+> then `npx ngrok http 4000` — ngrok gives you a temporary public URL you can
+> open on your phone and whose built sites you can text to prospects.
+
+### What the phone app does
+
+1. **Search** a town + business type → ranked leads appear, best prospects first.
+2. **Tap 📞 Call** — dials straight from your phone; the lead auto-marks "Called".
+3. **Tap 🛠️ Build site** — generates their website in a second.
+4. **Tap 💬 Text link** — opens your messages with *"I built you a free website
+   preview — take a look: <link>"* prefilled.
+5. **Tap the status chip** to cycle New → Called → Interested → Sold. Your call
+   list state is saved on the phone.
+
+---
+
+## Quick start (command line)
 
 No dependencies, no build step. Just Node 18+.
 
@@ -132,6 +188,8 @@ search-and-replace:
 ```
 Money-Printer/
 ├── src/
+│   ├── server.js            # 📱 mobile web app server (API + serves sites)
+│   ├── whoami.js            # prints your phone-reachable LAN URL
 │   ├── cli.js               # command-line entry point
 │   ├── finder/
 │   │   ├── places.js        # Google Places API client (+ demo fallback)
@@ -141,9 +199,15 @@ Money-Printer/
 │       ├── template.js      # the outstanding site template
 │       ├── themes.js        # category → color theme
 │       └── generate.js      # writes output files
+├── public/                  # the mobile app front-end (installable PWA)
+│   ├── index.html
+│   ├── app.css / app.js
+│   ├── manifest.webmanifest / sw.js
+│   └── icon*.png
 ├── site/                    # our own agency sales site
 ├── examples/                # screenshots + a live sample generated site
 ├── output/                  # generated client sites (gitignored)
+├── Dockerfile               # deploy the app anywhere
 └── package.json
 ```
 
@@ -151,11 +215,12 @@ Money-Printer/
 
 ## Roadmap ideas
 
-- Wrap the CLI in a simple mobile-friendly web UI (run it from your phone).
-- Auto-deploy generated sites to a static host and return a live URL.
+- ~~Wrap the CLI in a mobile-friendly web UI (run it from your phone).~~ ✅ done
+- ~~CRM-style status tracking per lead (called / interested / sold).~~ ✅ done
+- Auto-deploy each generated site to its own subdomain and return a live URL.
 - Pull business photos from Places into the hero.
 - A/B test site templates against reply rates.
-- CRM-style status tracking per lead (called / interested / sold).
+- Optional accounts so your call-list syncs across devices.
 
 ---
 

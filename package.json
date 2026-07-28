@@ -6,7 +6,11 @@
   "bin": {
     "money-printer": "src/cli.js"
   },
+  "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
+    "app": "node src/server.js",
+    "whoami": "node src/whoami.js",
     "find": "node src/cli.js find",
     "generate": "node src/cli.js generate",
     "pipeline": "node src/cli.js pipeline",

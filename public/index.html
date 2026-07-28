@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
+<meta name="theme-color" content="#0d1117" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Money Printer" />
+<title>Money Printer</title>
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>" />
+<link rel="apple-touch-icon" href="/icon.png" />
+<link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+<header class="appbar">
+  <div class="appbar-in">
+    <span class="logo">🖨️ Money Printer</span>
+    <span id="dataMode" class="mode" title="data source">demo</span>
+  </div>
+</header>
+
+<main class="screen">
+  <!-- SEARCH -->
+  <section class="search card">
+    <label class="field">
+      <span class="field-label">Find local businesses</span>
+      <input id="q" type="text" inputmode="search" enterkeyhint="search"
+             placeholder="e.g. plumbers in Boise, ID" autocomplete="off" />
+    </label>
+    <label class="toggle">
+      <input id="onlyNoSite" type="checkbox" />
+      <span>Only businesses with no website</span>
+    </label>
+    <button id="findBtn" class="btn btn-primary btn-block">🔎 Find leads</button>
+  </section>
+
+  <div id="status" class="status" hidden></div>
+
+  <!-- RESULTS -->
+  <section id="results" class="results"></section>
+
+  <div id="empty" class="empty">
+    <div class="empty-emoji">📋</div>
+    <p>Search a town + business type to pull up leads.<br />Tap a lead to call it or build them a website on the spot.</p>
+  </div>
+</main>
+
+<!-- toast -->
+<div id="toast" class="toast" hidden></div>
+
+<template id="leadTpl">
+  <article class="lead card">
+    <div class="lead-top">
+      <span class="score"></span>
+      <div class="lead-id">
+        <h2 class="lead-name"></h2>
+        <p class="lead-cat"></p>
+      </div>
+      <button class="statusChip" data-status>New</button>
+    </div>
+    <p class="lead-reason"></p>
+    <div class="lead-actions">
+      <a class="btn btn-call" data-call>📞 Call</a>
+      <button class="btn btn-build" data-build>🛠️ Build site</button>
+    </div>
+    <div class="built" hidden>
+      <a class="btn btn-preview" data-preview target="_blank" rel="noopener">👀 Preview</a>
+      <button class="btn btn-ghost" data-text>💬 Text link</button>
+      <button class="btn btn-ghost" data-copy>🔗 Copy</button>
+    </div>
+  </article>
+</template>
+
+<script src="/app.js"></script>
+</body>
+</html>
