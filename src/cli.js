@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
-const { findBusinesses } = require("./finder/places");
+const { findBusinesses, resolvePhotos } = require("./finder/places");
 const { scoreAll } = require("./finder/score");
 const { generateAll, generateSite } = require("./generator/generate");
 
@@ -101,6 +101,16 @@ async function cmdGenerate(args) {
   // Optionally only build strong leads.
   const min = args["min-score"] ? Number(args["min-score"]) : 0;
   const chosen = businesses.filter((b) => !b.lead || b.lead.score >= min);
+
+  // Pull real photos from Google at build time when a key is configured.
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  if (apiKey) {
+    for (const b of chosen) {
+      if (!b.photos && Array.isArray(b.photoNames) && b.photoNames.length) {
+        try { b.photos = await resolvePhotos(b.photoNames, { apiKey }); } catch (_) {}
+      }
+    }
+  }
 
   console.log(bold(`\n🏗  Generating ${chosen.length} site(s)...\n`));
   const results = generateAll(chosen, OUT_DIR);

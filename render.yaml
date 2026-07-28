@@ -1,0 +1,27 @@
+# Render Blueprint — one-click deploy of the Money Printer mobile app.
+# https://render.com/docs/blueprint-spec
+#
+# How to use:
+#   1. Push this repo to GitHub.
+#   2. In Render: New → Blueprint → pick this repo.
+#   3. After it deploys, add your GOOGLE_PLACES_API_KEY in the service's
+#      Environment tab (it's marked sync:false so it's never committed).
+#   4. Open the public onrender.com URL on your phone → Add to Home Screen.
+#
+# The app has no runtime dependencies, so builds are fast and the free plan
+# is plenty to start.
+services:
+  - type: web
+    name: money-printer
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: GOOGLE_PLACES_API_KEY
+        sync: false

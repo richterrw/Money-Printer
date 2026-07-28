@@ -24,6 +24,7 @@ const FIELD_MASK = [
   "places.userRatingCount",
   "places.regularOpeningHours",
   "places.reviews",
+  "places.photos",
   "places.location"
 ].join(",");
 
@@ -47,6 +48,10 @@ function mapPlace(p) {
     text: (r.text && r.text.text) || (r.originalText && r.originalText.text) || ""
   }));
 
+  // Raw photo resource names — resolved to real image URLs later, only when a
+  // site is actually built (keeps the find step cheap: no per-photo API calls).
+  const photoNames = (p.photos || []).slice(0, 4).map((ph) => ph.name).filter(Boolean);
+
   return {
     name: p.displayName && p.displayName.text,
     category: p.primaryTypeDisplayName && p.primaryTypeDisplayName.text,
@@ -62,8 +67,31 @@ function mapPlace(p) {
     lat: p.location && p.location.latitude,
     lng: p.location && p.location.longitude,
     hours,
-    reviews
+    reviews,
+    photoNames
   };
+}
+
+/* Resolve a Places photo resource name to a usable image URL.
+ * Uses skipHttpRedirect so we get JSON with a direct photoUri back. */
+async function resolvePhotoUrl(photoName, { apiKey, maxWidthPx = 1200 } = {}) {
+  const url =
+    `https://places.googleapis.com/v1/${photoName}/media` +
+    `?maxWidthPx=${maxWidthPx}&skipHttpRedirect=true&key=${encodeURIComponent(apiKey)}`;
+  const res = await fetch(url);
+  if (!res.ok) return null;
+  const data = await res.json().catch(() => null);
+  return (data && data.photoUri) || null;
+}
+
+/* Resolve up to `limit` photo names to URLs, dropping any that fail. */
+async function resolvePhotos(photoNames, { apiKey, maxWidthPx = 1200, limit = 4 } = {}) {
+  if (!apiKey || !Array.isArray(photoNames) || !photoNames.length) return [];
+  const chosen = photoNames.slice(0, limit);
+  const urls = await Promise.all(
+    chosen.map((n) => resolvePhotoUrl(n, { apiKey, maxWidthPx }).catch(() => null))
+  );
+  return urls.filter(Boolean);
 }
 
 /* Query the live API for a text query like "plumbers in Boise, ID". */
@@ -109,4 +137,4 @@ async function findBusinesses(query, opts = {}) {
   return { source, query, count: businesses.length, businesses };
 }
 
-module.exports = { findBusinesses, searchTextLive, mapPlace };
+module.exports = { findBusinesses, searchTextLive, mapPlace, resolvePhotoUrl, resolvePhotos };

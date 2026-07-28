@@ -118,6 +118,9 @@ function renderSite(business) {
     b.description ||
     `${b.category ? b.category + " in " : ""}${b.city || "your neighborhood"} — quality service you can count on.`;
   const hasPhone = Boolean(b.phone);
+  const photos = (b.photos || []).filter((u) => typeof u === "string" && u);
+  const heroPhoto = photos[0] || null;
+  const galleryPhotos = photos.slice(1, 4);
   const ratingBadge =
     b.rating && b.reviewsCount
       ? `<div class="rating-badge"><span class="rating-num">${esc(b.rating)}</span><span class="rating-stars">${stars(
@@ -186,11 +189,18 @@ function renderSite(business) {
   .hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
   @media(max-width:820px){.hero-cta{justify-content:center}}
   .hero-visual{aspect-ratio:1;border-radius:24px;display:grid;place-items:center;position:relative;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 30px 60px -20px var(--accent)}
+    overflow:hidden;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 30px 60px -20px var(--accent)}
   .hero-visual .emoji{font-size:clamp(5rem,16vw,9rem);filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
-  .rating-badge{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:var(--surface);
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .rating-badge{position:absolute;z-index:2;bottom:-18px;left:50%;transform:translateX(-50%);background:var(--surface);
     border:1px solid var(--line);border-radius:16px;padding:12px 18px;display:flex;flex-direction:column;
     align-items:center;box-shadow:0 12px 30px -12px rgba(0,0,0,.3);min-width:140px}
+  /* photo gallery */
+  .gallery{background:var(--surface);border-block:1px solid var(--line)}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:640px){.gallery-grid{grid-template-columns:1fr 1fr}}
+  .gallery-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;
+    border:1px solid var(--line);background:var(--bg)}
   .rating-num{font-size:1.6rem;font-weight:800;line-height:1}
   .rating-stars{color:#f5a623;letter-spacing:2px}
   .rating-count{font-size:.75rem;color:var(--muted)}
@@ -274,7 +284,11 @@ function renderSite(business) {
           </div>
         </div>
         <div class="hero-visual">
-          <span class="emoji">${esc(theme.hero)}</span>
+          ${
+            heroPhoto
+              ? `<img class="hero-photo" src="${esc(heroPhoto)}" alt="${esc(b.name || "")}" loading="eager" />`
+              : `<span class="emoji">${esc(theme.hero)}</span>`
+          }
           ${ratingBadge}
         </div>
       </div>
@@ -287,6 +301,18 @@ function renderSite(business) {
         ${servicesList(b, theme)}
       </ul>
     </section>
+
+    ${
+      galleryPhotos.length
+        ? `<section class="section gallery">
+      <h2 class="section-title">Take a look</h2>
+      <p class="section-sub">A few moments from ${esc(b.name || "us")}</p>
+      <div class="wrap gallery-grid">
+        ${galleryPhotos.map((u) => `<img src="${esc(u)}" alt="${esc(b.name || "")}" loading="lazy" />`).join("")}
+      </div>
+    </section>`
+        : ""
+    }
 
     ${reviewsSection(b)}
 

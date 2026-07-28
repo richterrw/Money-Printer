@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
-const { findBusinesses } = require("./finder/places");
+const { findBusinesses, resolvePhotos } = require("./finder/places");
 const { scoreAll } = require("./finder/score");
 const { generateSite, slugify } = require("./generator/generate");
 
@@ -84,6 +84,7 @@ async function apiFind(req, res) {
     reviews: b.reviews,
     services: b.services,
     lead: b.lead,
+    photoNames: b.photoNames,
     slug: slugify(b.name)
   }));
 
@@ -93,6 +94,17 @@ async function apiFind(req, res) {
 async function apiGenerate(req, res) {
   const business = JSON.parse((await readBody(req)) || "{}");
   if (!business || !business.name) return sendJson(res, 400, { error: "Missing business" });
+
+  // Pull real business photos from Google (only now, at build time) if we can.
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  if (apiKey && !business.photos && Array.isArray(business.photoNames) && business.photoNames.length) {
+    try {
+      business.photos = await resolvePhotos(business.photoNames, { apiKey });
+    } catch (_) {
+      /* photos are a bonus — never block site generation on them */
+    }
+  }
+
   const file = generateSite(business, OUT_DIR);
   const slug = path.basename(path.dirname(file));
   sendJson(res, 200, { slug, url: `/sites/${slug}/` });

@@ -19,7 +19,7 @@ part human (the phone call).
 | Piece | What it does |
 | --- | --- |
 | **Lead finder** (`src/finder`) | Queries Google Places for local businesses, flags the ones with **no website or an outdated one**, and returns their **phone numbers** — ranked best-prospect-first. |
-| **Website generator** (`src/generator`) | Turns one business into a polished, **mobile-ready, self-contained website** (single HTML file) — themed automatically by category, with click-to-call, reviews, hours, and map links. |
+| **Website generator** (`src/generator`) | Turns one business into a polished, **mobile-ready, self-contained website** (single HTML file) — themed automatically by category, with **real business photos** (hero + gallery, pulled from Google), click-to-call, reviews, hours, and map links. |
 | **📱 Mobile app** (`src/server.js` + `public/`) | Run the whole thing **from your phone**: search leads, tap-to-call, build a site in one tap, and text the link — all from a phone-friendly, installable web app. |
 | **CLI** (`src/cli.js`) | Same pipeline from a terminal: `find`, `generate`, `pipeline`, `serve`. |
 | **Agency sales site** (`site/`) | *Our own* marketing site to sell the service — the conversion engine. Open `site/index.html`. |
@@ -54,17 +54,29 @@ Host the server so it has a public URL. Now the app *and* every website you
 build get real links you can text to prospects on the spot. It's a plain Node
 app with no dependencies, so almost anything works:
 
+**One-click on Render (easiest):** this repo ships a `render.yaml` Blueprint.
+1. Push the repo to GitHub.
+2. In [Render](https://render.com): **New → Blueprint** → pick the repo.
+3. After it deploys, add `GOOGLE_PLACES_API_KEY` in the service's Environment
+   tab (the Blueprint marks it `sync:false`, so it's never committed).
+4. Open the `onrender.com` URL on your phone → **Add to Home Screen**.
+
+**Or any Docker host** (Railway, Fly.io, a VPS, ...):
+
 ```bash
-# any Docker host (Render, Railway, Fly.io, a VPS, ...)
 docker build -t money-printer .
 docker run -e GOOGLE_PLACES_API_KEY=your-key -p 4000:4000 money-printer
 ```
 
-Or point a Node host (Render/Railway/Heroku-style) at this repo with:
-- **Start command:** `npm start`
-- **Env var:** `GOOGLE_PLACES_API_KEY` (for live leads)
+Any Node host works too — start command `npm start`, env var
+`GOOGLE_PLACES_API_KEY`. Then open the public URL on your phone and Add to
+Home Screen.
 
-Then open the public URL on your phone and Add to Home Screen.
+> ⚠️ **Heads up on the free tier:** generated sites are written to the server's
+> local disk, which is **ephemeral** — a redeploy or idle-restart wipes them, so
+> old links can break. That's fine for building-and-texting during a call. For
+> permanently hosted client sites, add persistent storage or push each site to
+> its own static host (on the roadmap below).
 
 > ⚡ **Instant public link without deploying:** run `npm start` on your laptop,
 > then `npx ngrok http 4000` — ngrok gives you a temporary public URL you can
@@ -208,6 +220,7 @@ Money-Printer/
 ├── examples/                # screenshots + a live sample generated site
 ├── output/                  # generated client sites (gitignored)
 ├── Dockerfile               # deploy the app anywhere
+├── render.yaml              # one-click Render deploy blueprint
 └── package.json
 ```
 
@@ -217,8 +230,10 @@ Money-Printer/
 
 - ~~Wrap the CLI in a mobile-friendly web UI (run it from your phone).~~ ✅ done
 - ~~CRM-style status tracking per lead (called / interested / sold).~~ ✅ done
+- ~~Pull business photos from Places into the hero.~~ ✅ done (hero + gallery)
+- ~~One-click deploy.~~ ✅ done (`render.yaml` Blueprint)
+- Persist generated sites (object storage) so links never break on redeploy.
 - Auto-deploy each generated site to its own subdomain and return a live URL.
-- Pull business photos from Places into the hero.
 - A/B test site templates against reply rates.
 - Optional accounts so your call-list syncs across devices.
 
