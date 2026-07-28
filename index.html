@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Printer — go brrr</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🖨️ Money Printer</h1>
+    <p class="tagline">go <span class="brrr">brrr</span></p>
+  </header>
+
+  <main>
+    <section class="stats">
+      <div class="balance">
+        <span class="label">Balance</span>
+        <span id="balance" class="value">$0</span>
+      </div>
+      <div class="rate">
+        <span class="label">Per second</span>
+        <span id="rate" class="value">$0/s</span>
+      </div>
+      <div class="rate">
+        <span class="label">Per click</span>
+        <span id="perClick" class="value">$1</span>
+      </div>
+      <div class="rate">
+        <span class="label">Total printed</span>
+        <span id="total" class="value">$0</span>
+      </div>
+    </section>
+
+    <section class="printer-area">
+      <button id="printer" class="printer" aria-label="Print money">
+        <div class="printer-body">
+          <div class="printer-slot"></div>
+          <div class="printer-lights">
+            <span class="light"></span><span class="light"></span><span class="light"></span>
+          </div>
+        </div>
+        <div class="printer-label">TAP TO PRINT</div>
+      </button>
+      <div id="floaters" class="floaters" aria-hidden="true"></div>
+    </section>
+
+    <section class="shop">
+      <h2>Upgrades</h2>
+      <div id="shopList" class="shop-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <button id="resetBtn" class="reset">Reset progress</button>
+    <span class="saved" id="savedNote">Auto-saves locally</span>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>
