@@ -4,231 +4,323 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rosa&#39;s Taqueria | Boise, ID</title>
-<meta name="description" content="Mexican restaurant in Boise — quality service you can count on." />
+<meta name="description" content="Rosa&#39;s Taqueria is a mexican restaurant in Boise, ID, built on doing right by our neighbors. Whether it&#39;s your first visit or your fiftieth, we bring the s" />
 <meta property="og:title" content="Rosa&#39;s Taqueria" />
-<meta property="og:description" content="Mexican restaurant in Boise — quality service you can count on." />
+<meta property="og:description" content="Rosa&#39;s Taqueria is a mexican restaurant in Boise, ID, built on doing right by our neighbors. Whether it&#39;s your first visit or your fiftieth, we bring the s" />
 <meta property="og:type" content="business.business" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Fraunces%3Aopsz%2Cwght%409..144%2C500%3B9..144%2C600%3B9..144%2C700&amp;display=swap" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%8D%BD%EF%B8%8F</text></svg>" />
 <style>
   :root{
     --accent:#e8632c;--accent2:#f6a13d;--ink:#2b1a12;
-    --bg:#fffaf4;--surface:#ffffff;--muted:#5b6875;--line:#e7ebf0;
+    --bg:#fffaf4;--surface:#ffffff;--muted:#5b6875;--line:#e6e9f0;
+    --display:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;
-    font-weight:700;font-size:1rem;cursor:pointer;border:2px solid transparent;transition:.15s;white-space:nowrap}
-  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px -6px var(--accent)}
-  .btn-primary:hover{transform:translateY(-2px)}
-  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.display{font-family:var(--display);font-weight:700;line-height:1.1;letter-spacing:-.01em}
+  .kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;
+    font-weight:700;color:var(--accent);margin-bottom:10px}
+  .h2{font-size:clamp(1.8rem,3.6vw,2.7rem);margin-bottom:34px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:999px;
+    font-weight:700;font-size:1rem;cursor:pointer;border:2px solid transparent;transition:.18s;font-family:var(--sans)}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 30px -8px var(--accent)}
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .btn-ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.14)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{transform:translateY(-2px)}
 
   /* header */
-  .site-header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--surface) 88%,transparent);
-    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem}
-  .brand .mark{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:1.1rem}
-  .nav{display:flex;gap:22px;align-items:center}
-  .nav a{color:var(--muted);font-weight:600;font-size:.95rem}
-  .nav a:hover{color:var(--accent)}
-  @media(max-width:720px){.nav a:not(.btn){display:none}}
+  header.site{position:fixed;top:0;left:0;right:0;z-index:40;transition:.3s}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:700;font-size:1.2rem;color:#fff}
+  .brand .mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:1.15rem}
+  header.site .nav{display:flex;gap:26px;align-items:center}
+  header.site .nav a{color:rgba(255,255,255,.9);font-weight:600;font-size:.95rem}
+  header.site.solid{background:var(--surface);box-shadow:0 2px 20px rgba(0,0,0,.08)}
+  header.site.solid .brand,header.site.solid .nav a{color:var(--ink)}
+  header.site .nav .btn-primary{color:#fff}
+  @media(max-width:760px){header.site .nav a:not(.btn){display:none}}
 
   /* hero */
-  .hero{position:relative;overflow:hidden;padding:76px 0 64px;
-    background:radial-gradient(900px 420px at 78% -10%,color-mix(in srgb,var(--accent2) 22%,transparent),transparent),
-      linear-gradient(180deg,var(--surface),var(--bg))}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-  @media(max-width:820px){.hero-grid{grid-template-columns:1fr;text-align:center}}
-  .eyebrow{display:inline-block;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
-    font-size:.78rem;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);
-    padding:6px 14px;border-radius:999px;margin-bottom:18px}
-  .hero h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.08;letter-spacing:-.5px}
-  .hero p.lead{margin-top:16px;font-size:1.15rem;color:var(--muted);max-width:34ch}
-  @media(max-width:820px){.hero p.lead{margin-inline:auto}}
-  .hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
-  @media(max-width:820px){.hero-cta{justify-content:center}}
-  .hero-visual{aspect-ratio:1;border-radius:24px;display:grid;place-items:center;position:relative;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 30px 60px -20px var(--accent)}
-  .hero-visual .emoji{font-size:clamp(5rem,16vw,9rem);filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
-  .rating-badge{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:var(--surface);
-    border:1px solid var(--line);border-radius:16px;padding:12px 18px;display:flex;flex-direction:column;
-    align-items:center;box-shadow:0 12px 30px -12px rgba(0,0,0,.3);min-width:140px}
-  .rating-num{font-size:1.6rem;font-weight:800;line-height:1}
-  .rating-stars{color:#f5a623;letter-spacing:2px}
-  .rating-count{font-size:.75rem;color:var(--muted)}
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover}
+  .hero-bg.grad{background:
+    radial-gradient(1000px 600px at 75% 15%,var(--accent2),transparent),
+    linear-gradient(135deg,var(--accent),var(--ink))}
+  .hero-overlay{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(10,12,16,.55),rgba(10,12,16,.35) 40%,rgba(10,12,16,.82))}
+  .hero-content{position:relative;z-index:2;padding:120px 0 70px;max-width:760px}
+  .hero .eyebrow{display:inline-flex;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.02em;
+    background:rgba(255,255,255,.16);backdrop-filter:blur(6px);padding:8px 16px;border-radius:999px;margin-bottom:22px}
+  .hero h1{font-size:clamp(2.6rem,6.5vw,4.6rem);text-shadow:0 2px 30px rgba(0,0,0,.3)}
+  .hero .lead{margin-top:18px;font-size:clamp(1.05rem,2vw,1.3rem);max-width:48ch;color:rgba(255,255,255,.92)}
+  .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero-meta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);padding:9px 16px;border-radius:999px;
+    font-size:.92rem;font-weight:600}
+  .chip-stars{color:#ffd15c;letter-spacing:1px}
+  .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.8);
+    font-size:1.5rem;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
   /* sections */
-  .section{padding:64px 0}
-  .section-title{font-size:1.9rem;letter-spacing:-.3px;margin-bottom:8px;text-align:center}
-  .section-sub{text-align:center;color:var(--muted);margin-bottom:36px}
+  .section{padding:92px 0}
+  .section.tight{padding:70px 0}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-copy p{font-size:1.12rem;color:var(--muted);margin-top:14px}
+  .about-photo{border-radius:22px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 60px -28px rgba(0,0,0,.4)}
+  .about-photo.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:6rem}
+  .about-photo img{width:100%;height:100%;object-fit:cover}
+  .about-stats{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap}
+  .about-stats .n{font-family:var(--display);font-size:2rem;color:var(--accent)}
+  .about-stats .l{color:var(--muted);font-size:.9rem}
+
+  /* services */
   .services{background:var(--surface);border-block:1px solid var(--line)}
-  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 40px;max-width:760px;margin:0 auto;list-style:none}
-  @media(max-width:640px){.services-grid{grid-template-columns:1fr}}
-  .service{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid var(--line);
-    border-radius:14px;background:var(--bg);font-weight:600}
-  .service-dot{width:12px;height:12px;border-radius:50%;flex:none;
-    background:linear-gradient(135deg,var(--accent),var(--accent2))}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.svc-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.svc-grid{grid-template-columns:1fr}}
+  .svc{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:.2s}
+  .svc:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 20px 40px -24px var(--accent)}
+  .svc-ic{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:12px;font-size:1.2rem;
+    color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);margin-bottom:14px}
+  .svc h3{font-size:1.18rem}
+
+  /* gallery */
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+  @media(max-width:820px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+  .gi{overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--surface)}
+  .gi img{width:100%;height:100%;object-fit:cover;transition:.4s}
+  .gi:hover img{transform:scale(1.06)}
+  .gi-0{grid-column:span 2;grid-row:span 2}
+  @media(max-width:820px){.gi-0{grid-column:span 2;grid-row:span 1}}
 
   /* reviews */
-  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  @media(max-width:820px){.reviews-grid{grid-template-columns:1fr}}
-  .review{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
-  .review-stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
-  .review blockquote{font-size:1.02rem;margin-bottom:14px}
-  .review figcaption{color:var(--muted);font-weight:600;font-size:.9rem}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:860px){.reviews-grid{grid-template-columns:1fr}}
+  .review{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 28px 26px}
+  .qmark{font-family:var(--display);font-size:4rem;line-height:.6;color:color-mix(in srgb,var(--accent) 30%,transparent);height:26px}
+  .review-stars{color:#f5a623;letter-spacing:2px;margin:6px 0 10px}
+  .review blockquote{font-size:1.05rem}
+  .review figcaption{margin-top:14px;font-weight:700;color:var(--accent)}
 
-  /* contact */
-  .contact{background:var(--surface);border-top:1px solid var(--line)}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  @media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
-  .card{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:26px}
-  .card-title{font-size:1.15rem;margin-bottom:14px}
-  .contact-line{display:flex;align-items:center;gap:12px;padding:8px 0;font-weight:600}
-  .contact-line .ic{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;
+  /* visit / map */
+  .visit-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:stretch}
+  @media(max-width:860px){.visit-grid{grid-template-columns:1fr}}
+  .map{border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:380px;background:var(--surface)}
+  .map iframe{width:100%;height:100%;min-height:380px;border:0;filter:saturate(1.05)}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px;margin-bottom:20px}
+  .panel:last-child{margin-bottom:0}
+  .panel-title{font-size:1.2rem;margin-bottom:14px}
+  .cline{display:flex;align-items:center;gap:12px;padding:9px 0;font-weight:600}
+  .cline .ic{width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;
     background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
-  .contact-line a:hover{color:var(--accent)}
-  .hours-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
-  .hours-row:last-child{border-bottom:none}
-  .hours-row span:first-child{color:var(--muted)}
+  .hrow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.96rem}
+  .hrow:last-child{border-bottom:none}
+  .hrow span:first-child{color:var(--muted)}
+  .hrow.today{font-weight:700;color:var(--accent)}
+  .hrow.today span:first-child{color:var(--accent)}
 
-  /* cta band */
-  .cta-band{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-align:center;padding:56px 0}
-  .cta-band h2{font-size:1.9rem;margin-bottom:10px}
-  .cta-band p{opacity:.92;margin-bottom:24px}
-  .cta-band .btn{background:#fff;color:var(--accent)}
+  /* cta */
+  .cta{position:relative;color:#fff;text-align:center;padding:96px 0;overflow:hidden;
+    background:linear-gradient(135deg,var(--accent),var(--ink))}
+  .cta h2{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+  .cta p{opacity:.92;margin-bottom:28px;font-size:1.15rem}
+  .cta .btn-primary{background:#fff;color:var(--accent)}
 
   /* footer */
-  .site-footer{padding:34px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer.site{background:var(--ink);color:rgba(255,255,255,.75);padding:40px 0}
+  footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer.site .brand{color:#fff;font-size:1.05rem}
 
-  /* sticky mobile call bar */
-  .callbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;
-    background:var(--surface);border-top:1px solid var(--line);padding:10px 14px}
+  /* mobile call bar */
+  .callbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;padding:12px 16px;
+    background:var(--surface);border-top:1px solid var(--line)}
   .callbar .btn{width:100%;justify-content:center}
-  @media(max-width:720px){.callbar{display:block}body{padding-bottom:76px}}
+  @media(max-width:760px){.callbar{display:block}body{padding-bottom:80px}}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0ms)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site" id="hdr">
     <div class="wrap">
-      <a class="brand" href="#top">
-        <span class="mark">🍽️</span>
-        <span>Rosa&#39;s Taqueria</span>
-      </a>
+      <a class="brand" href="#top"><span class="mark">🍽️</span> Rosa&#39;s Taqueria</a>
       <nav class="nav">
+        <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn-primary" href="tel:2085550142">Call (208) 555-0142</a>
+        <a href="#visit">Visit</a>
+        <a class="btn btn-primary" href="tel:2085550142">Call now</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
+    <!-- HERO -->
     <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
+      <div class="hero-bg grad">
+        
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="wrap">
+        <div class="hero-content">
           <span class="eyebrow">Mexican restaurant · Boise, ID</span>
           <h1>Rosa&#39;s Taqueria</h1>
-          <p class="lead">Mexican restaurant in Boise — quality service you can count on.</p>
+          <p class="lead">🍽️ Mexican restaurant in Boise, ID</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="tel:2085550142">📞 Call now</a>
+            <a class="btn btn-primary" href="tel:2085550142">📞 Call (208) 555-0142</a>
             <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID" target="_blank" rel="noopener">📍 Get directions</a>
           </div>
+          <div class="hero-meta"><span class="chip"><b>4.7</b> <span class="chip-stars">★★★★★</span> · 213 reviews</span><span class="chip">🕒 Today: 11am–9pm</span></div>
         </div>
-        <div class="hero-visual">
-          <span class="emoji">🍽️</span>
-          <div class="rating-badge"><span class="rating-num">4.7</span><span class="rating-stars">★★★★★</span><span class="rating-count">213 reviews</span></div>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll down">▾</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap about-grid">
+        <div class="about-copy reveal">
+          <p class="kicker">About us</p>
+          <h2 class="h2" style="margin-bottom:6px">Your neighborhood mexican restaurant</h2>
+          <p>Rosa&#39;s Taqueria is a mexican restaurant in Boise, ID, built on doing right by our neighbors. Whether it&#39;s your first visit or your fiftieth, we bring the same care and quality every time. We&#39;re proud of the 4.7★ reputation we&#39;ve earned across 213 reviews from customers just like you.</p>
+          <div class="about-stats">
+            <div><div class="n">4.7★</div><div class="l">Average rating</div></div>
+            <div><div class="n">213</div><div class="l">Happy reviews</div></div>
+            <div><div class="n">Boise</div><div class="l">Proudly local</div></div>
+          </div>
+        </div>
+        <div class="about-photo grad reveal" style="--d:120ms">
+          🍽️
         </div>
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section class="section services" id="services">
-      <h2 class="section-title">What we offer</h2>
-      <p class="section-sub">Boise, ID</p>
-      <ul class="services-grid">
-        
-        <li class="service">
-          <span class="service-dot"></span>
-          <span>Street tacos &amp; burritos</span>
-        </li>
-        <li class="service">
-          <span class="service-dot"></span>
-          <span>Fresh salsa bar</span>
-        </li>
-        <li class="service">
-          <span class="service-dot"></span>
-          <span>Catering for events</span>
-        </li>
-        <li class="service">
-          <span class="service-dot"></span>
-          <span>Family meal deals</span>
-        </li>
-      </ul>
+      <div class="wrap">
+        <p class="kicker reveal">What we offer</p>
+        <h2 class="h2 reveal">Everything you came for</h2>
+        <div class="svc-grid">
+        <article class="svc reveal" style="--d:0ms">
+          <span class="svc-ic">✦</span>
+          <h3>Street tacos &amp; burritos</h3>
+        </article>
+        <article class="svc reveal" style="--d:60ms">
+          <span class="svc-ic">◆</span>
+          <h3>Fresh salsa bar</h3>
+        </article>
+        <article class="svc reveal" style="--d:120ms">
+          <span class="svc-ic">❖</span>
+          <h3>Catering for events</h3>
+        </article>
+        <article class="svc reveal" style="--d:180ms">
+          <span class="svc-ic">✧</span>
+          <h3>Family meal deals</h3>
+        </article></div>
+      </div>
     </section>
 
     
-    <section class="section reviews" id="reviews">
-      <h2 class="section-title">What people say</h2>
-      <div class="reviews-grid">
-        <figure class="review">
-          <div class="review-stars">★★★★★</div>
-          <blockquote>Best carne asada in town. The line moves fast and the staff are so friendly.</blockquote>
-          <figcaption>— Marcus T.</figcaption>
-        </figure>
-        <figure class="review">
-          <div class="review-stars">★★★★★</div>
-          <blockquote>Authentic, affordable, and generous portions. My go-to lunch spot.</blockquote>
-          <figcaption>— Priya N.</figcaption>
-        </figure>
-        <figure class="review">
-          <div class="review-stars">★★★★☆</div>
-          <blockquote>Great food. Wish they were open on Sundays!</blockquote>
-          <figcaption>— Dave R.</figcaption>
-        </figure></div>
-    </section>
 
-    <section class="section contact" id="contact">
-      <h2 class="section-title">Visit or get in touch</h2>
-      <p class="section-sub">We'd love to hear from you</p>
-      <div class="wrap contact-grid">
-        <div class="card">
-          <h3 class="card-title">Contact</h3>
-          <div class="contact-line"><span class="ic">📞</span><a href="tel:2085550142">(208) 555-0142</a></div>
-          <div class="contact-line"><span class="ic">📍</span><a href="https://www.google.com/maps/search/?api=1&query=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID" target="_blank" rel="noopener">412 W Idaho St, Boise, ID</a></div>
+    
+    <section class="section reviews reveal" id="reviews">
+      <div class="wrap">
+        <p class="kicker">Reviews</p>
+        <h2 class="h2">Loved by locals</h2>
+        <div class="reviews-grid">
           
-          <div style="margin-top:18px">
-            <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID" target="_blank" rel="noopener">Open in Maps</a>
-          </div>
+            <figure class="review">
+              <div class="qmark">“</div>
+              <div class="review-stars">★★★★★</div>
+              <blockquote>Best carne asada in town. The line moves fast and the staff are so friendly.</blockquote>
+              <figcaption>Marcus T.</figcaption>
+            </figure>
+            <figure class="review">
+              <div class="qmark">“</div>
+              <div class="review-stars">★★★★★</div>
+              <blockquote>Authentic, affordable, and generous portions. My go-to lunch spot.</blockquote>
+              <figcaption>Priya N.</figcaption>
+            </figure>
+            <figure class="review">
+              <div class="qmark">“</div>
+              <div class="review-stars">★★★★☆</div>
+              <blockquote>Great food. Wish they were open on Sundays!</blockquote>
+              <figcaption>Dave R.</figcaption>
+            </figure>
         </div>
-        
-    <div class="card hours-card">
-      <h3 class="card-title">Hours</h3>
-      <div class="hours-row"><span>Monday</span><span>11am–9pm</span></div><div class="hours-row"><span>Tuesday</span><span>11am–9pm</span></div><div class="hours-row"><span>Wednesday</span><span>11am–9pm</span></div><div class="hours-row"><span>Thursday</span><span>11am–9pm</span></div><div class="hours-row"><span>Friday</span><span>11am–10pm</span></div><div class="hours-row"><span>Saturday</span><span>11am–10pm</span></div><div class="hours-row"><span>Sunday</span><span>Closed</span></div>
-    </div>
       </div>
     </section>
 
-    <section class="cta-band">
+    <!-- VISIT -->
+    <section class="section" id="visit">
+      <div class="wrap">
+        <p class="kicker reveal">Visit us</p>
+        <h2 class="h2 reveal">Come say hello</h2>
+        <div class="visit-grid reveal">
+          <div class="map"><iframe title="Map to Rosa&#39;s Taqueria" src="https://www.google.com/maps?q=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          <div>
+            <div class="panel">
+              <h3 class="panel-title">Get in touch</h3>
+              <div class="cline"><span class="ic">📞</span><a href="tel:2085550142">(208) 555-0142</a></div>
+              <div class="cline"><span class="ic">📍</span><a href="https://www.google.com/maps/search/?api=1&query=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID" target="_blank" rel="noopener">412 W Idaho St, Boise, ID</a></div>
+              
+              <div style="margin-top:16px"><a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Rosa's%20Taqueria%2C%20412%20W%20Idaho%20St%2C%20Boise%2C%20ID" target="_blank" rel="noopener">Open in Maps</a></div>
+            </div>
+            <div class="panel"><h3 class="panel-title">Opening hours</h3><div class="hrow"><span>Monday</span><span>11am–9pm</span></div><div class="hrow today"><span>Tuesday</span><span>11am–9pm</span></div><div class="hrow"><span>Wednesday</span><span>11am–9pm</span></div><div class="hrow"><span>Thursday</span><span>11am–9pm</span></div><div class="hrow"><span>Friday</span><span>11am–10pm</span></div><div class="hrow"><span>Saturday</span><span>11am–10pm</span></div><div class="hrow"><span>Sunday</span><span>Closed</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
       <div class="wrap">
         <h2>Ready when you are</h2>
-        <p>Give us a call — we're happy to help.</p>
-        <a class="btn" href="tel:2085550142">📞 Call (208) 555-0142</a>
+        <p>Give us a call — we'd love to help.</p>
+        <a class="btn btn-primary" href="tel:2085550142">📞 Call (208) 555-0142</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site">
     <div class="wrap">
-      <p>&copy; 2026 Rosa&#39;s Taqueria · Boise, ID</p>
+      <span class="brand"><span class="mark" style="width:32px;height:32px">🍽️</span> Rosa&#39;s Taqueria</span>
+      <span>© 2026 Rosa&#39;s Taqueria · Boise, ID</span>
     </div>
   </footer>
 
   <div class="callbar"><a class="btn btn-primary" href="tel:2085550142">📞 Call Rosa&#39;s Taqueria</a></div>
+
+  <script>
+    // solid header after scrolling past the hero
+    var hdr = document.getElementById('hdr');
+    var onScroll = function(){ hdr.classList.toggle('solid', window.scrollY > window.innerHeight * 0.7); };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+    // reveal on scroll
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  </script>
 </body>
 </html>

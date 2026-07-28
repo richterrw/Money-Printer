@@ -78,12 +78,27 @@ const DEFAULT_THEME = {
   sampleServices: ["Trusted local business", "Quality you can count on", "Get in touch today"]
 };
 
+/* Font pairing per theme. `display` is a Google Font for headings; body is
+ * always Inter for legibility. Warm/editorial categories get a serif display;
+ * modern/technical ones get a strong geometric sans. */
+const FONTS = {
+  food: { display: "Fraunces", weights: "Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700" },
+  beauty: { display: "Fraunces", weights: "Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700" },
+  retail: { display: "Fraunces", weights: "Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700" },
+  trades: { display: "Sora", weights: "Sora:wght@600;700;800" },
+  health: { display: "Sora", weights: "Sora:wght@600;700;800" },
+  pro: { display: "Sora", weights: "Sora:wght@600;700;800" },
+  default: { display: "Sora", weights: "Sora:wght@600;700;800" }
+};
+
 function themeFor(category, name) {
   const haystack = `${category || ""} ${name || ""}`;
-  for (const key of Object.keys(THEMES)) {
-    if (THEMES[key].match.test(haystack)) return { key, ...THEMES[key] };
+  let key = "default";
+  let theme = DEFAULT_THEME;
+  for (const k of Object.keys(THEMES)) {
+    if (THEMES[k].match.test(haystack)) { key = k; theme = THEMES[k]; break; }
   }
-  return { key: "default", ...DEFAULT_THEME };
+  return { key, ...theme, font: FONTS[key] || FONTS.default };
 }
 
-module.exports = { themeFor, THEMES, DEFAULT_THEME };
+module.exports = { themeFor, THEMES, DEFAULT_THEME, FONTS };
